@@ -1,11 +1,11 @@
 {
   "name": "zmq",
-  "version": "2.2.0",
+  "version": "3.2.0",
   "description": "Bindings for node.js to zeromq",
   "main": "index",
   "repository": {
     "type" : "git",
-    "url" : "http://github.com/JustinTulloss/zeromq.node.git"
+    "url" : "http://github.com/upstartmobile/zeromq.node.git"
   },
   "devDependencies": {
     "should": "*",
