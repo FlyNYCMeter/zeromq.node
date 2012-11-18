@@ -47,12 +47,12 @@ describe( 'ZMQ structure', function(){
 
       it( 'Should support a cross publish socket', function(){
         zmq.hasOwnProperty( 'ZMQ_XPUB' );
-        zmq[ 'ZMQ_XPUB' ].should.equal( -1 );
+        zmq[ 'ZMQ_XPUB' ].should.equal( 9 );
       });
 
       it( 'Should support a cross subscribe socket', function(){
         zmq.hasOwnProperty( 'ZMQ_XSUB' );
-        zmq[ 'ZMQ_XSUB' ].should.equal( -1 );
+        zmq[ 'ZMQ_XSUB' ].should.equal( 10 );
       });
 
     });
@@ -141,7 +141,7 @@ describe( 'ZMQ structure', function(){
 
     it( 'Should support Get multicast recovery interval', function(){
       zmq.hasOwnProperty( 'ZMQ_RECOVERY_IVL' );
-      zmq[ 'ZMQ_RECOVER_IVL' ].should.equal( 9 );
+      zmq[ 'ZMQ_RECOVERY_IVL' ].should.equal( 9 );
     });
 
     it( 'Should support Retrieve kernel transmit buffer size', function(){
@@ -166,7 +166,7 @@ describe( 'ZMQ structure', function(){
 
     it( 'Should support Retrieve maximum reconnection interval', function(){
       zmq.hasOwnProperty( 'ZMQ_RECONNECT_IVL_MAX' );
-      zmq[ 'ZMQ_RECONNECT_IVL_MAX' ].should.equal( -1 );
+      zmq[ 'ZMQ_RECONNECT_IVL_MAX' ].should.equal( 21 );
     });
 
     it( 'Should support Retrieve maximum length of queue of outstanding connections', function(){
@@ -176,37 +176,37 @@ describe( 'ZMQ structure', function(){
 
     it( 'Should support Maximum acceptable inbound message size', function(){
       zmq.hasOwnProperty( 'ZMQ_MAXMSGSIZE' );
-      zmq[ 'ZMQ_MAXMSGSIZE' ].should.equal( -1 );
+      zmq[ 'ZMQ_MAXMSGSIZE' ].should.equal( 22 );
     });
 
     it( 'Should support Maximum network hops for multicast packets', function(){
       zmq.hasOwnProperty( 'ZMQ_MULTICAST_HOPS' );
-      zmq[ 'ZMQ_MULTICAST_HOPS' ].should.equal( -1 );
+      zmq[ 'ZMQ_MULTICAST_HOPS' ].should.equal( 25 );
     });
 
     it( 'Should support Maximum time before a socket operation returns with EAGAIN', function(){
       zmq.hasOwnProperty( 'ZMQ_RCVTIMEO' );
-      zmq[ 'ZMQ_RCVTIMEO' ].should.equal( -1 );
+      zmq[ 'ZMQ_RCVTIMEO' ].should.equal( 27 );
     });
 
     it( 'Should support Maximum time before a socket operation return with EAGAIN', function(){
       zmq.hasOwnProperty( 'ZMQ_SNDTIMEO' );
-      zmq[ 'ZMQ_SNDTIMEO' ].should.equal( -1 );
+      zmq[ 'ZMQ_SNDTIMEO' ].should.equal( 28 );
     });
 
     it( 'Should support Retrieve IPv4 only socket override status', function(){
       zmq.hasOwnProperty( 'ZMQ_IPV4ONLY' );
-      zmq[ 'ZMQ_IPV4ONLY' ].should.equal( -1 );
+      zmq[ 'ZMQ_IPV4ONLY' ].should.equal( 31 );
     });
 
     it( 'Should support Retrieve attach-on-connect valude', function(){
       zmq.hasOwnProperty( 'ZMQ_DELAY_ATTACH_ON_CONNECT' );
-      zmq[ 'ZMQ_DELAY_ATTACH_ON_CONNECT' ].should.equal( -1 );
+      zmq[ 'ZMQ_DELAY_ATTACH_ON_CONNECT' ].should.equal( 39 );
     });
 
     it( 'Should support Retrieve file descriptor associated with the socket', function(){
       zmq.hasOwnProperty( 'ZMQ_FD' );
-      zmq[ 'ZMQ_FD' ].should.equal( -1 );
+      zmq[ 'ZMQ_FD' ].should.equal( 14 );
     });
 
     describe( 'ZMQ socket events', function(){
@@ -230,22 +230,22 @@ describe( 'ZMQ structure', function(){
 
     it( 'Should support Retrieve last endpoint set', function(){
       zmq.hasOwnProperty( 'ZMQ_LAST_ENDPOINT' );
-      zmq[ 'ZMQ_LAST_ENDPOINT' ].should.equal( -1 );
+      zmq[ 'ZMQ_LAST_ENDPOINT' ].should.equal( 32 );
     });
 
     it( 'Should support TCP keep alive', function(){
       zmq.hasOwnProperty( 'ZMQ_TCP_KEEPALIVE' );
-      zmq[ 'ZMQ_TCP_KEEPALIVE' ].should.equal( -1 );
+      zmq[ 'ZMQ_TCP_KEEPALIVE' ].should.equal( 34 );
     });
 
     it( 'Should support TCP keep alive count', function(){
       zmq.hasOwnProperty( 'ZMQ_TCP_KEEPALIVE_CNT' );
-      zmq[ 'ZMQ_TCP_KEEPALIVE_CNT' ].should.equal( -1 );
+      zmq[ 'ZMQ_TCP_KEEPALIVE_CNT' ].should.equal( 35 );
     });
 
     it( 'Should support TCP keep alive interval', function(){
       zmq.hasOwnProperty( 'ZMQ_TCP_KEEPALIVE_INTVL' );
-      zmq[ 'ZMQ_TCP_KEEPALIVE_INTVL' ].should.equal( -1 );
+      zmq[ 'ZMQ_TCP_KEEPALIVE_INTVL' ].should.equal( 37 );
     });
 
   });//End socket options

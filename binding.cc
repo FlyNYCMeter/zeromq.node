@@ -41,9 +41,9 @@ using namespace v8;
 using namespace node;
 
 enum {
-    STATE_READY
-  , STATE_BUSY
-  , STATE_CLOSED
+    STATE_READY, 
+    STATE_BUSY, 
+    STATE_CLOSED
 };
 
 namespace zmq {
@@ -53,30 +53,30 @@ namespace zmq {
   class Context : ObjectWrap {
     friend class Socket;
     public:
-      static void Initialize(v8::Handle<v8::Object> target);
+      static void Initialize( v8::Handle< v8::Object > target );
       virtual ~Context();
 
     private:
-      Context(int io_threads);
-      static Handle<Value> New(const Arguments& args);
-      static Context* GetContext(const Arguments &args);
+      Context( int io_threads );
+      static Handle< Value > New( const Arguments& args );
+      static Context* GetContext( const Arguments &args );
 
       void Close();
-      static Handle<Value> Close(const Arguments& args);
+      static Handle< Value > Close( const Arguments& args );
 
       void* context_;
   };
 
   class Socket : ObjectWrap {
     public:
-      static void Initialize(v8::Handle<v8::Object> target);
+      static void Initialize( v8::Handle< v8::Object > target );
       virtual ~Socket();
       void CallbackIfReady();
 
     private:
-      static Handle<Value> New(const Arguments &args);
-      Socket(Context *context, int type);
-      static Socket* GetSocket(const Arguments &args);
+      static Handle< Value > New( const Arguments &args );
+      Socket( Context *context, int type );
+      static Socket* GetSocket( const Arguments &args );
 
       static Handle<Value> GetState(Local<String> p, const AccessorInfo& info);
 
@@ -842,44 +842,49 @@ namespace zmq {
   static void
   Initialize(Handle<Object> target) {
     HandleScope scope;
-
+    //Socket types
     NODE_DEFINE_CONSTANT(target, ZMQ_PUB);
+    NODE_DEFINE_CONSTANT( target, ZMQ_XPUB );
     NODE_DEFINE_CONSTANT(target, ZMQ_SUB);
+    NODE_DEFINE_CONSTANT( target, ZMQ_XSUB );
     NODE_DEFINE_CONSTANT(target, ZMQ_REQ);
-    NODE_DEFINE_CONSTANT(target, ZMQ_XREQ);
     NODE_DEFINE_CONSTANT(target, ZMQ_REP);
-    NODE_DEFINE_CONSTANT(target, ZMQ_XREP);
     NODE_DEFINE_CONSTANT(target, ZMQ_DEALER);
     NODE_DEFINE_CONSTANT(target, ZMQ_ROUTER);
     NODE_DEFINE_CONSTANT(target, ZMQ_PUSH);
     NODE_DEFINE_CONSTANT(target, ZMQ_PULL);
     NODE_DEFINE_CONSTANT(target, ZMQ_PAIR);
-
-    #if ZMQ_VERSION_MAJOR == 2
-    NODE_DEFINE_CONSTANT(target, ZMQ_HWM);
-    NODE_DEFINE_CONSTANT(target, ZMQ_SWAP);
-    #else
+    //Socket options
+    NODE_DEFINE_CONSTANT( target, ZMQ_TYPE );
+    NODE_DEFINE_CONSTANT( target, ZMQ_RCVMORE );
     NODE_DEFINE_CONSTANT(target, ZMQ_SNDHWM);
     NODE_DEFINE_CONSTANT(target, ZMQ_RCVHWM);
-    #endif
     NODE_DEFINE_CONSTANT(target, ZMQ_AFFINITY);
-    NODE_DEFINE_CONSTANT(target, ZMQ_IDENTITY);
     NODE_DEFINE_CONSTANT(target, ZMQ_SUBSCRIBE);
     NODE_DEFINE_CONSTANT(target, ZMQ_UNSUBSCRIBE);
+    NODE_DEFINE_CONSTANT(target, ZMQ_IDENTITY);
     NODE_DEFINE_CONSTANT(target, ZMQ_RATE);
     NODE_DEFINE_CONSTANT(target, ZMQ_RECOVERY_IVL);
-    #if ZMQ_VERSION_MAJOR == 2
-    NODE_DEFINE_CONSTANT(target, ZMQ_MCAST_LOOP);
-    #endif
     NODE_DEFINE_CONSTANT(target, ZMQ_SNDBUF);
     NODE_DEFINE_CONSTANT(target, ZMQ_RCVBUF);
-    NODE_DEFINE_CONSTANT(target, ZMQ_RCVMORE);
-    NODE_DEFINE_CONSTANT(target, ZMQ_FD);
-    NODE_DEFINE_CONSTANT(target, ZMQ_EVENTS);
-    NODE_DEFINE_CONSTANT(target, ZMQ_TYPE);
-    NODE_DEFINE_CONSTANT(target, ZMQ_LINGER);
-    NODE_DEFINE_CONSTANT(target, ZMQ_RECONNECT_IVL);
-    NODE_DEFINE_CONSTANT(target, ZMQ_BACKLOG);
+    NODE_DEFINE_CONSTANT( target, ZMQ_LINGER );
+    NODE_DEFINE_CONSTANT( target, ZMQ_RECONNECT_IVL );
+    NODE_DEFINE_CONSTANT( target, ZMQ_RECONNECT_IVL_MAX );
+    NODE_DEFINE_CONSTANT( target, ZMQ_BACKLOG );
+    NODE_DEFINE_CONSTANT( target, ZMQ_MAXMSGSIZE );
+    NODE_DEFINE_CONSTANT( target, ZMQ_MULTICAST_HOPS );
+    NODE_DEFINE_CONSTANT( target, ZMQ_RCVTIMEO );
+    NODE_DEFINE_CONSTANT( target, ZMQ_SNDTIMEO );
+    NODE_DEFINE_CONSTANT( target, ZMQ_IPV4ONLY );
+    NODE_DEFINE_CONSTANT( target, ZMQ_DELAY_ATTACH_ON_CONNECT );
+    NODE_DEFINE_CONSTANT( target, ZMQ_FD );
+    NODE_DEFINE_CONSTANT( target, ZMQ_EVENTS );
+    NODE_DEFINE_CONSTANT( target, ZMQ_LAST_ENDPOINT );
+    NODE_DEFINE_CONSTANT( target, ZMQ_TCP_KEEPALIVE );
+    NODE_DEFINE_CONSTANT( target, ZMQ_TCP_KEEPALIVE_IDLE );
+    NODE_DEFINE_CONSTANT( target, ZMQ_TCP_KEEPALIVE_CNT );
+    NODE_DEFINE_CONSTANT( target, ZMQ_TCP_KEEPALIVE_INTVL );
+    NODE_DEFINE_CONSTANT( target, ZMQ_TCP_ACCEPT_FILTER );
 
     NODE_DEFINE_CONSTANT(target, ZMQ_POLLIN);
     NODE_DEFINE_CONSTANT(target, ZMQ_POLLOUT);
@@ -890,9 +895,9 @@ namespace zmq {
     NODE_DEFINE_CONSTANT(target, ZMQ_NOBLOCK);
     #endif
 
-    NODE_DEFINE_CONSTANT(target, STATE_READY);
-    NODE_DEFINE_CONSTANT(target, STATE_BUSY);
-    NODE_DEFINE_CONSTANT(target, STATE_CLOSED);
+    NODE_DEFINE_CONSTANT( target, STATE_READY );
+    NODE_DEFINE_CONSTANT( target, STATE_BUSY );
+    NODE_DEFINE_CONSTANT( target, STATE_CLOSED );
 
     NODE_SET_METHOD( target, "version", ZmqVersion );
 
@@ -902,10 +907,9 @@ namespace zmq {
 } // namespace zmq
 
 // module
-
 extern "C" void
-init(Handle<Object> target) {
-  zmq::Initialize(target);
+init( Handle< Object > target ) {
+  zmq::Initialize( target );
 }
 
-NODE_MODULE(binding, init)
+NODE_MODULE( binding, init )
