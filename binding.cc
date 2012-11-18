@@ -807,17 +807,17 @@ namespace zmq {
     }
   }
 
-  Handle<Value>
-  Socket::Close(const Arguments &args) {
+  Handle< Value >
+  Socket::Close( const Arguments &args ) {
     HandleScope scope;
-    GET_SOCKET(args);
+    GET_SOCKET( args );
     socket->Close();
     return Undefined();
   }
 
   // Make zeromq versions less than 2.1.3 work by defining
   // the new constants if they don't already exist
-  #if (ZMQ_VERSION < 20103)
+  #if ( ZMQ_VERSION < 20103 )
   #   define ZMQ_DEALER ZMQ_XREQ
   #   define ZMQ_ROUTER ZMQ_XREP
   #endif
@@ -826,17 +826,17 @@ namespace zmq {
    * Module functions.
    */
 
-  static Handle<Value>
-  ZmqVersion(const Arguments& args) {
+  static Handle< Value >
+  ZmqVersion( const Arguments& args ) {
     HandleScope scope;
 
     int major, minor, patch;
-    zmq_version(&major, &minor, &patch);
+    zmq_version( &major, &minor, &patch );
 
-    char version_info[16];
-    snprintf(version_info, 16, "%d.%d.%d", major, minor, patch);
+    char version_info[ 16 ];
+    snprintf( version_info, 16, "%d.%d.%d", major, minor, patch );
 
-    return scope.Close(String::New(version_info));
+    return scope.Close( String::New( version_info ));
   }
 
   static void
@@ -894,10 +894,10 @@ namespace zmq {
     NODE_DEFINE_CONSTANT(target, STATE_BUSY);
     NODE_DEFINE_CONSTANT(target, STATE_CLOSED);
 
-    NODE_SET_METHOD(target, "zmqVersion", ZmqVersion);
+    NODE_SET_METHOD( target, "version", ZmqVersion );
 
-    Context::Initialize(target);
-    Socket::Initialize(target);
+    Context::Initialize( target );
+    Socket::Initialize( target );
   }
 } // namespace zmq
 
